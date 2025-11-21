@@ -102,6 +102,7 @@ src/main/java/br/com/fiap/globalsolution
 
 ## 🧠 Modelo de Domínio (UML)
 
+```text
 +---------------------+        +---------------------+        +----------------------+
 |       Usuario       | 1..N   |      Matricula      | N..1   |        Trilha        |
 +---------------------+        +---------------------+        +----------------------+
@@ -115,12 +116,13 @@ src/main/java/br/com/fiap/globalsolution
                                                           |
                                                           v
                                                   +----------------------+
-                                                  |    Competencia       |
+                                                  |     Competencia      |
                                                   +----------------------+
                                                   | id                   |
                                                   | nome                 |
                                                   | descricao            |
                                                   +----------------------+
+
 
 ## 📡 Endpoints da API
 
