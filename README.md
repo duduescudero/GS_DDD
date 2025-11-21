@@ -3,13 +3,13 @@
 API RESTful desenvolvida em Java 17 + Spring Boot 3 utilizando os princípios de Domain Driven Design (DDD).
 A solução simula uma plataforma moderna de Upskilling e Reskilling, conectada às demandas do futuro do trabalho (2030+), alinhada às ODS das Nações Unidas.
 
-##👥 Integrantes
+## 👥 Integrantes
 Arthur Fellipe Estevão da Silva – RM553320  
 Eduardo Pires Escudero – RM556527  
 Leonardo Munhoz Prado – RM556824
 
 
-##📘 Sumário
+## 📘 Sumário
 - Visão Geral
 - Problema & Solução Proposta
 - Arquitetura do Projeto (DDD)
