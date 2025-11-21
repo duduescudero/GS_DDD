@@ -65,14 +65,14 @@ Bean Validation (@NotBlank, @Email, @PastOrPresent)
 ## ❌ Tratamento de Erros
 404 | 400 | 409
 
-##🗄 Banco H2
+## 🗄 Banco H2
 Console: http://localhost:8080/h2-console  
 JDBC: jdbc:h2:mem:globalsolutiondb
 
-##🏁 Como Executar
+## 🏁 Como Executar
 mvn clean install  
 mvn spring-boot:run
 
-##🌱 Conexão com ODS
+## 🌱 Conexão com ODS
 ODS 4, 8, 9, 10 — conforme descrição do projeto.
 
