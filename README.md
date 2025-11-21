@@ -1,4 +1,4 @@
-🌍 Global Solution 2025 – Plataforma de Upskilling / Reskilling para o Futuro do Trabalho
+# 🌍 Global Solution 2025 – Plataforma de Upskilling / Reskilling para o Futuro do Trabalho
 
 API RESTful desenvolvida em Java 17 + Spring Boot 3 utilizando os princípios de Domain Driven Design (DDD).
 A solução simula uma plataforma moderna de Upskilling e Reskilling, conectada às demandas do futuro do trabalho (2030+), alinhada às ODS das Nações Unidas.
