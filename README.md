@@ -1,78 +1,235 @@
 # 🌍 Global Solution 2025 – Plataforma de Upskilling / Reskilling para o Futuro do Trabalho
 
-API RESTful desenvolvida em Java 17 + Spring Boot 3 utilizando os princípios de Domain Driven Design (DDD).
-A solução simula uma plataforma moderna de Upskilling e Reskilling, conectada às demandas do futuro do trabalho (2030+), alinhada às ODS das Nações Unidas.
+API RESTful desenvolvida em Java 17 + Spring Boot 3, estruturada com princípios de Domain Driven Design (DDD).
+A plataforma simula uma solução moderna de Upskilling e Reskilling, alinhada às necessidades do mercado de trabalho de 2030+ e conectada às ODS da ONU.
 
-## 👥 Integrantes
-Arthur Fellipe Estevão da Silva – RM553320  
-Eduardo Pires Escudero – RM556527  
-Leonardo Munhoz Prado – RM556824
+## 👥 Integrantes do Grupo
 
+- Arthur Fellipe Estevão da Silva – RM553320
+- Eduardo Pires Escudero – RM556527
+- Leonardo Munhoz Prado – RM556824
 
 ## 📘 Sumário
+
 - Visão Geral
 - Problema & Solução Proposta
 - Arquitetura do Projeto (DDD)
 - Estrutura de Pastas
-- Modelo de Domínio
-- Endpoints da API (OpenAPI)
-- Validações Aplicadas
+- Modelo de Domínio (UML)
+- Endpoints da API
+- Exemplos JSON
+- Validações Implementadas
+- Tratamento de Erros
 - Configuração do Banco H2
 - Como Executar o Projeto
 - Conexão com ODS
+- Checklist de Requisitos Atendidos
 
 ## 🔎 Visão Geral
+
 A plataforma permite:
 
-👤 Gestão de Usuários  
-Cadastrar e gerenciar profissionais/alunos com informações como: nome, email, área de atuação, nível de carreira e data de cadastro.
+👤 Gestão de Usuários
 
-🧭 Trilha de Aprendizagem  
-Criar trilhas focadas em competências do futuro (Tech, Human Skills etc).
+Cadastro
+Atualização
+Exclusão
+Listagem
 
-🧩 Competências  
-Cadastro de habilidades técnicas/soft skills que compõem cada trilha.
+🧭 Trilhas de Aprendizagem
 
-🎓 Matrículas  
-Vincular usuários às trilhas e acompanhar o progresso.
+Conjunto de competências (hard e soft skills) estruturadas por nível e objetivo.
 
-## 🧩 Problema & Solução Proposta  
-O mercado de trabalho 2030 exige aprendizado contínuo, adaptação rápida, competências humanas/técnicas e reskilling.  
-A solução oferece trilhas educacionais, mapeamento de competências, acompanhamento e personalização.
+🧩 Competências
+
+Habilidades específicas que podem compor uma ou mais trilhas.
+
+🎓 Matrículas
+
+Associação entre usuário e trilha, incluindo:
+
+data da inscrição
+status da matrícula
+
+## 🧩 Problema & Solução Proposta
+
+❗ O Problema
+
+O mercado de 2030 exige:
+
+atualização contínua
+reskilling em carreiras emergentes
+competências humanas e técnicas
+adaptação a IA, automação e dados
+
+💡 A Solução
+
+Criamos uma plataforma que:
+✔ Gerencia trilhas educacionais
+✔ Mapeia competências essenciais
+✔ Registra matrículas
+✔ Acompanha evolução do aluno
+✔ Incentiva aprendizado contínuo
 
 ## 🏛 Arquitetura do Projeto (DDD)
-domain/ – Entidades e regras  
-repository/ – Persistência  
-service/ – Regras de negócio  
-controller/ – API REST  
-exception/ – Tratamento de erros  
+
+O projeto segue as camadas:
+
+domain/      → Entidades e Regras de Negócio  
+repository/  → Persistência (Spring Data JPA)  
+service/     → Lógica e Validações  
+controller/  → API REST  
+exception/   → Tratamento de Erros  
+
+Benefícios:
+
+Manutenção facilitada
+Código desacoplado
+Organização clara
+Expansão futura mais simples
 
 ## 📂 Estrutura de Pastas
-src/main/java/br/com/fiap/globalsolution  
-config/ | controller/ | exception/ | model/ | repository/ | service/
 
-## 🧠 Modelo de Domínio
-Usuário | Competência | Trilha | Matrícula  
-Relacionamentos:  
-Usuário 1..N Matrículas | Trilha 1..N Matrículas | Trilha N..N Competências
+src/main/java/br/com/fiap/globalsolution
+│
+├── config/                  → Configurações gerais (CORS, etc.)
+├── controller/              → Endpoints REST
+├── exception/               → Exceções e Handler global
+├── model/                   → Entidades JPA (DDD Domain)
+├── repository/              → Interfaces JPA (DAO)
+├── service/                 → Regras de negócio
+└── GlobalSolutionApplication.java
 
-## 📡 Endpoints (Swagger)
-http://localhost:8080/swagger-ui/index.html
+## 🧠 Modelo de Domínio (UML)
 
-## ✔ Validações Aplicadas
-Bean Validation (@NotBlank, @Email, @PastOrPresent)
++---------------------+        +---------------------+        +----------------------+
+|       Usuario       | 1..N   |      Matricula      | N..1   |        Trilha        |
++---------------------+        +---------------------+        +----------------------+
+| id                  |        | id                  |        | id                   |
+| nome                |        | dataInscricao       |        | nome                 |
+| email               |        | status              |        | descricao            |
+| areaAtuacao         |        | usuario_id ---------|------> | nivel                |
+| nivelCarreira       |        | trilha_id  ---------|------> | cargaHoraria         |
++---------------------+        +---------------------+        +----------------------+
+                                                          | 1..N
+                                                          |
+                                                          v
+                                                  +----------------------+
+                                                  |    Competencia       |
+                                                  +----------------------+
+                                                  | id                   |
+                                                  | nome                 |
+                                                  | descricao            |
+                                                  +----------------------+
+
+## 📡 Endpoints da API
+
+👤 Usuários
+GET    /api/usuarios
+GET    /api/usuarios/{id}
+POST   /api/usuarios
+PUT    /api/usuarios/{id}
+DELETE /api/usuarios/{id}
+
+🧭 Trilhas
+GET    /api/trilhas
+GET    /api/trilhas/{id}
+POST   /api/trilhas
+PUT    /api/trilhas/{id}
+DELETE /api/trilhas/{id}
+
+🧩 Competências
+GET    /api/competencias
+POST   /api/competencias
+
+🎓 Matrículas
+GET /api/matriculas
+GET /api/matriculas/usuario/{id}
+POST /api/matriculas?usuarioId=1&trilhaId=3
+
+## 📦 Exemplos JSON
+
+Criar usuário
+{
+  "nome": "Ana Silva",
+  "email": "ana.silva@fiap.com",
+  "areaAtuacao": "Tecnologia",
+  "nivelCarreira": "Júnior"
+}
+
+Criar trilha
+{
+  "nome": "Trilha de Inteligência Artificial",
+  "descricao": "Introdução a IA e Machine Learning",
+  "nivel": "Intermediário",
+  "cargaHoraria": 40,
+  "focoPrincipal": "Tecnologia"
+}
+
+Criar competência
+{
+  "nome": "Lógica de Programação",
+  "categoria": "Técnica",
+  "descricao": "Fundamentos essenciais de programação"
+}
+
+## ✔ Validações Implementadas
+
+@NotBlank
+@Email
+@Min
+@PastOrPresent
+@NotNull
 
 ## ❌ Tratamento de Erros
-404 | 400 | 409
 
-## 🗄 Banco H2
-Console: http://localhost:8080/h2-console  
-JDBC: jdbc:h2:mem:globalsolutiondb
+400 — Erros de validação
+404 — Recurso não encontrado
+500 — Erro interno
+JSON estruturado
 
-## 🏁 Como Executar
-mvn clean install  
+## 🗄 Configuração do Banco H2
+
+Console disponível em:
+
+👉 http://localhost:8080/h2-console
+
+Credenciais
+
+JDBC URL: jdbc:h2:mem:globalsolutiondb
+User: sa
+Password: (vazio)
+
+## 🏁 Como Executar o Projeto
+
+Requisitos
+
+Java 17
+Maven 3.8+
+
+Comandos
+mvn clean install
 mvn spring-boot:run
 
-## 🌱 Conexão com ODS
-ODS 4, 8, 9, 10 — conforme descrição do projeto.
+Aplicação inicia em:
+👉 http://localhost:8080
 
+## 🌱 Conexão com ODS
+
+ODS    Como o projeto contribui
+ODS 4  Educação de qualidade via trilhas acessíveis
+ODS 8  Preparação para o mercado e novas carreiras
+ODS 9  Incentivo à inovação e tecnologia
+ODS 10 Redução de desigualdades no acesso ao aprendizado
+
+## ✅ Checklist de Requisitos Atendidos
+
+Requisito                      Status
+2 CRUDs completos              ✔
+DDD aplicado                   ✔
+Validações Bean Validation     ✔
+Seeds no banco                 ✔
+Exceções customizadas          ✔
+README completo                ✔
+Arquitetura em camadas         ✔
+Matrículas implementadas       ✔
